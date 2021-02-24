@@ -40,11 +40,10 @@
 </div>
 <script src="{{ asset('js/jquery-3.3.1.min.js') }}" ></script>
 
-
 <script>
 
     $(document).ready(function () {
-        var socket = new WebSocket("ws://159.203.191.85:1215");
+        var socket = new WebSocket("ws://0.0.0.0:1215");
         socket.onopen = function (event) {
             console.log("Connection open ...");
         }
@@ -62,7 +61,7 @@
                     "operation": $(this).attr("operation")
                 }
             };
-            socket.send(msg)
+            socket.send(JSON.stringify(msg))
 
         })
     })
