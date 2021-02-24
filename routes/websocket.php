@@ -14,10 +14,10 @@ use SwooleTW\Http\Websocket\Facades\Websocket;
 */
 
 Websocket::on('connect', function ($websocket, Request $request) {
-    $request->user();
-    $user=auth()->user();
+    //$request->user();
+   // $user=auth()->user();
    // echo "connect";
-    echo $user."connect";
+    //echo $user."connect";
     //$websocket->emit('message', "hehehe");
 });
 
@@ -29,3 +29,4 @@ Websocket::on('example', function ($websocket, $data) {
     $websocket->emit('message', $data);
 });
 Websocket::on('login', 'App\Http\Controllers\ConnectionController@index');
+Websocket::on('web_operation', 'App\Http\Controllers\ConnectionController@operation');

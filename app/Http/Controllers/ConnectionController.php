@@ -19,9 +19,9 @@ class ConnectionController extends Controller
     public function index(Websocket $websocket, $data)
     {
         $websocket->loginUsingId($data["uid"]);
-        $user=User::find($data["uid"]);
-        $websocket->toUserId(2)->emit('message', 'hi there');
-        echo $websocket->getUserId();
+        //$user=User::find($data["uid"]);
+       // $websocket->toUserId(2)->emit('message', 'hi there');
+       // echo $websocket->getUserId();
 
         // $websocket->emit('message', 'broadcasting');
        // $websocket->toUserId($data["uid"])->emit('message', 'hi there');
@@ -30,5 +30,10 @@ class ConnectionController extends Controller
         //echo $websocket->getSender();
         // $websocket->to(1)->emit('return', "Message received" . json_encode($data));
        // $websocket->emit('return', "Message received" . json_encode($data));
+    }
+
+    public function operation(Websocket $websocket, $data){
+        $user=auth()->user();
+        $websocket->toUserId($user->id)->emit('operation',$data["operation"]);
     }
 }
