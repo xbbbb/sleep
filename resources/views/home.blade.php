@@ -43,7 +43,7 @@
     window.onload = function () {
 
         // 初始化客户端套接字并建立连接
-        var socket = new WebSocket("ws://67.205.148.14:1215");
+        var socket = new WebSocket("ws://159.203.191.85:1215");
 
         // 连接建立时触发
         socket.onopen = function (event) {
