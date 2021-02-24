@@ -55,6 +55,7 @@
 
 
         $(".btn").click(function () {
+            console.log("hehehe")
             let msg={
                 "event": "web_operation",
                 "data": {
