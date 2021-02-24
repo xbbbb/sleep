@@ -36,7 +36,6 @@ class ConnectionController extends Controller
     public function operation(Websocket $websocket, $data){
         //echo ("hehehe");
         $user=auth()->user();
-        echo "user".$user->id;
         $websocket->toUserId($user->id)->emit('operation',$data["operation"]);
     }
 }
