@@ -23,6 +23,7 @@ Websocket::on('connect', function ($websocket, Request $request) {
 
 Websocket::on('disconnect', function ($websocket) {
     $websocket->logout();
+    echo "logout";
     // called while socket on disconnect
 });
 
