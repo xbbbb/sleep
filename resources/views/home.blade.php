@@ -58,7 +58,7 @@
                 "event": "web_operation",
                 "data": {
                     "operation": $(this).attr("operation"),
-                    "user": {{ Auth::user()->id }};
+                    "user": {{ Auth::user()->id }}
                 }
             };
             socket.send(JSON.stringify(msg))
