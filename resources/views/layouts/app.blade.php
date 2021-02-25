@@ -56,7 +56,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('/logout') }}">
+                                    <a class="dropdown-item" href="{{ url('/log-out') }}">
                                         {{ __('Logout') }}
                                     </a>
                                    <!-- <a class="dropdown-item" href="{{ route('logout') }}"
