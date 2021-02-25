@@ -13,7 +13,7 @@ class PanelController extends Controller
     }
 
     public function logout(){
-        Auth::logout();
+        auth()->logout();
         Session::flush();
         return redirect('/');
     }
