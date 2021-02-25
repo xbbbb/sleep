@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Session;
 class PanelController extends Controller
 {
     public function home(){
-        $user=Auth::user();
-        return view("home",compact("user"));
+        return view("home");
     }
 
     public function logout(){
