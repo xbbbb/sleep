@@ -17,6 +17,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', "PanelController@home")->middleware('auth');
+Route::get('/record', "RecordController@index")->middleware('auth');
+
 Route::get('/log-out', "PanelController@logout");
 
 //Route::get('/', 'GuestController@index');
