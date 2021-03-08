@@ -42,7 +42,7 @@
                                     </p>
                                 </td>
                                 <td>
-                                    <p>{{$company['created_at']}}</p>
+                                    <p>{{$record['created_at']}}</p>
                                 </td>
 
                             </tr>
