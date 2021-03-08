@@ -8,7 +8,7 @@
                 <div class="card-header">Record</div>
 
                 <div class="card-body">
-                    <table class="table table-striped table-hover text-center mt-3" style="min-width: 900px; ">
+                    <table class="table table-striped table-hover text-center mt-3 w-100" style="min-width: 900px; ">
                         <thead>
                         <tr>
 
