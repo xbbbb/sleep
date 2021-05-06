@@ -114,8 +114,7 @@
             };
             socket.send(JSON.stringify(msg))
             $("#board").append(generateTalking($("#talk").val(),false))
-            history.push("me: "+$("#talk").val())
-
+            $("#talk").val("")
         })
         $("#save").click(function () {
             let json=JSON.stringify(history)

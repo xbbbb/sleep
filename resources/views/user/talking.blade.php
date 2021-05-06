@@ -103,7 +103,7 @@
             socket.send(JSON.stringify(msg))
             $("#board").append(generateTalking($("#talk").val(),false))
             history.push("me: "+$("#talk").val())
-            console.log(history)
+            $("#talk").val("")
 
 
         })
