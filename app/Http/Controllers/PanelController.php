@@ -11,7 +11,7 @@ use PDF;
 class PanelController extends Controller
 {
     public function home(){
-        return view("home");
+        return redirect()->to("/manager_talking/1");
     }
 
     public function logout(){
