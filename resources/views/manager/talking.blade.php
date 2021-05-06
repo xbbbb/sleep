@@ -85,7 +85,10 @@
                     history.push($("#customer").val() +": "+data.data.content)
 
                 }
-                else if(data.data.user!=parseInt({{ Auth::user()->id }})){
+                else if(data.data.user==parseInt({{ Auth::user()->id }})){
+
+                }
+                else{
                     if (confirm("You have a new Customer")) {
                         window.open("/manager_talking/"+data.data.user);
                     }
