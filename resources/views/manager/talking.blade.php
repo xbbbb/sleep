@@ -87,6 +87,8 @@
                         return;
                     }
                     else{
+                        console.log(data.data.user)
+                        console.log($("#to").val())
                         window.open("/manager_talking/"+data.data.user);
 
                     }
