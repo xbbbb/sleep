@@ -80,22 +80,22 @@
            let data = JSON.parse(e.data)
             console.log(data);
             if(data.event=="receive"){
-                if(data.data.user==$("#to").val()){
-                    $("#board").append(generateTalking(data.data.content,true))
-                    history.push($("#customer").val() +": "+data.data.content)
+                if(data.data.user!=parseInt({{ Auth::user()->id }})){
+                    if(data.data.user==$("#to").val()){
+                        $("#board").append(generateTalking(data.data.content,true))
+                        history.push($("#customer").val() +": "+data.data.content)
 
-                }
-                else if(data.data.user==parseInt({{ Auth::user()->id }})){
-
-                }
-                else{
-                    if (confirm("You have a new Customer")) {
-                        window.open("/manager_talking/"+data.data.user);
                     }
                     else{
-                        window.open("/manager_talking/"+data.data.user);
+                        if (confirm("You have a new Customer")) {
+                            window.open("/manager_talking/"+data.data.user);
+                        }
+                        else{
+                            window.open("/manager_talking/"+data.data.user);
+                        }
                     }
                 }
+
 
 
             }
