@@ -16,7 +16,7 @@
                     <div class="form-group row justify-content-center">
                         <div class="col-md-8">
                                 <input type="hidden" value="{{$to}}" id="to">
-                            <input type="hidden" value="{{$name."/".$email}}" id="customer">
+                            <input type="hidden" value="{{$name."|".$email}}" id="customer">
 
                             <textarea  class="w-100 form-control my-editor" name="talk" id="talk">
 
