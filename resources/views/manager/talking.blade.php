@@ -87,9 +87,7 @@
                         return;
                     }
                     else{
-                        if (confirm("You have a new Customer")) {
-                            window.open("/manager_talking/"+data.data.user);
-                        }
+                        window.open("/manager_talking/"+data.data.user);
 
                     }
                 }
