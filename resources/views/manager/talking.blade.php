@@ -90,13 +90,10 @@
                         alert(1)
                         console.log(data.data.user)
                         console.log($("#to").val())
-                        window.open("/manager_talking/"+data.data.user);
+                       // window.open("/manager_talking/"+data.data.user);
 
                     }
                 }
-
-
-
             }
 
             //$("#board").append(generateTalking($("#talk").val(),false))
