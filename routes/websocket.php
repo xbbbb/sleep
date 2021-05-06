@@ -30,4 +30,5 @@ Websocket::on('example', function ($websocket, $data) {
     $websocket->emit('message', $data);
 });
 Websocket::on('login', 'App\Http\Controllers\ConnectionController@index');
-Websocket::on('web_operation', 'App\Http\Controllers\ConnectionController@operation');
+Websocket::on('manager_send', 'App\Http\Controllers\ConnectionController@manager_send');
+Websocket::on('client_send', 'App\Http\Controllers\ConnectionController@client_send');

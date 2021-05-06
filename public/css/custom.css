@@ -1,9 +1,22 @@
-/*********************************************************************************
+.talking
+{
+    border:1px solid #17a2b8;
+    background-color:white;
+    padding: 5px 15px;
+    border-radius:40px;
+    color:#17a2b8;
+    float: left;
+    max-width: 100%;
+}
 
-    Template Name: Fsulting - Financial Consulting Bootstrap 4 Template
-	Description: Fsulting is a beautiful and unique financial & consulting html template which comes with bootstrap 4 framework.
-	Version: 1
 
-	Note: This is custom css. All custom styles (user styles) declare here.
-
-**********************************************************************************/
+.receiving
+{
+    border:1px solid #17a2b8;
+    background-color:#17a2b8;
+    padding: 5px 15px;
+    border-radius:40px;
+    color:white;
+    float: right;
+    max-width: 100%;
+}

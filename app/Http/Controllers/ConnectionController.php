@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use SwooleTW\Http\Websocket\Websocket;
 
 class ConnectionController extends Controller
@@ -33,8 +34,24 @@ class ConnectionController extends Controller
        // $websocket->emit('return', "Message received" . json_encode($data));
     }
 
-    public function operation(Websocket $websocket, $data){
+    public function manager_send(Websocket $websocket, $data){
 
-        $websocket->toUserId($data["user"])->emit('operation',$data["operation"]);
+        $websocket->toUserId($data["user"])->emit('operation',$data["content"]);
     }
+
+
+    public function client_send(Websocket $websocket, $data){
+        Log::debug($data["to"]);
+        $result=[
+          "user"=>  $data["user"],
+          "content"=>$data["content"],
+        ];
+        $websocket->toUserId($data["to"])->emit('receive',$result);
+    }
+
+
+
+
+
+
 }
