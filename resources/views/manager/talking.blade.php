@@ -84,15 +84,13 @@
                     if(data.data.user==$("#to").val()){
                         $("#board").append(generateTalking(data.data.content,true))
                         history.push($("#customer").val() +": "+data.data.content)
-
+                        return;
                     }
                     else{
                         if (confirm("You have a new Customer")) {
                             window.open("/manager_talking/"+data.data.user);
                         }
-                        else{
-                            window.open("/manager_talking/"+data.data.user);
-                        }
+
                     }
                 }
 
