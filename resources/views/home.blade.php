@@ -1,72 +1,48 @@
-@extends('layouts.app')
+<div class='container tab-pane' id='profile'>
+    <div class='row justify-content-center'>
+        <div class='col-md-8'>
+            <div class='card'>
+                <div class='card-header'>{{ $name }} &nbsp;&nbsp;&nbsp;&nbsp; {{$email}}</div>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class='card-body' id='board'>
 
-                <div class="card-body">
-                        <div class="form-group row mb-0 justify-content-center">
-                            <div class="col-md-8 ">
-                                <button type="button" class="btn btn-primary w-100" operation="1">
-                                    On
-                                </button>
-                            </div>
-
-                            <div class="col-md-8 mt-2">
-                                <button type="button" class="btn btn-danger w-100" operation="0">
-                                    Off
-                                </button>
-                            </div>
-
-                            <div class="col-md-8 mt-2">
-                                <button type="button" class="btn btn-outline-danger w-100" operation="2">
-                                     Up
-                                </button>
-                            </div>
-
-                            <div class="col-md-8 mt-2">
-                                <button type="button" class="btn btn-outline-info w-100" operation="3">
-                                    Down
-                                </button>
-                            </div>
-                        </div>
                 </div>
+
+
+                <div class='card-body mt-3 '>
+                    <div class='form-group row justify-content-center'>
+                        <div class='col-md-8'>
+                            <input type='hidden' value='{{$to}}' id='to'>
+                            <input type='hidden' value='{{$name.'|'.$email}}' id='customer'>
+
+                            <textarea  class='w-100 form-control my-editor talk'  id='talk'>
+
+                            </textarea>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <div class='form-group row justify-content-center'>
+                        <div class='col-md-8 '>
+                            <button type='button' class='btn btn-primary' id='send'>
+                                {{ __('Send') }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class='form-group row justify-content-center mt-1'>
+                        <div class='col-md-8 '>
+                            <button type='button' class='btn btn-primary' id='save'>
+                                {{ __('Save') }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
-<script src="{{ asset('js/jquery-3.3.1.min.js') }}" ></script>
-<script>
-
-    $(document).ready(function () {
-        var socket = new WebSocket("ws://159.203.191.85:1215");
-        socket.onopen = function (event) {
-            console.log("Connection open ...");
-        }
-
-        socket.onclose = function (event) {
-            console.log("Connection closed ...");
-        }
-
-
-        $(".btn").click(function () {
-            console.log("hehehe")
-            let msg={
-                "event": "web_operation",
-                "data": {
-                    "operation": $(this).attr("operation"),
-                    "user": {{ Auth::user()->id }}
-                }
-            };
-            socket.send(JSON.stringify(msg))
-
-        })
-    })
-
-
-</script>
-
-@endsection

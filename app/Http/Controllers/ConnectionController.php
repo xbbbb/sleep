@@ -41,10 +41,12 @@ class ConnectionController extends Controller
 
 
     public function client_send(Websocket $websocket, $data){
-        Log::debug($data["to"]);
+        $user=User::find($data["user"]);
+        $name=$user->name."|".$user->email;
         $result=[
           "user"=>  $data["user"],
           "content"=>$data["content"],
+            "name"=>$name,
         ];
         $websocket->toUserId($data["to"])->emit('receive',$result);
     }
