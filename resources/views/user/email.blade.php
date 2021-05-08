@@ -27,7 +27,7 @@
                             </div>
 
                             <div class="form-group col-md-12 col-xs-12">
-                                <input type="text" class="form-control" name="message" value="" placeholder="Message" required>
+                                <input type="text" class="form-control" name="messages" value="" placeholder="Message" required>
                             </div>
 
 
