@@ -31,6 +31,9 @@ class PanelController extends Controller
             return redirect("/manager_talking");
         }
         $manager=User::find($to);
+        if($manager->if_online==0){
+            return redirect("/email/".$to);
+        }
         if($manager->admin_level==1){
             $name=$manager->name;
             return view("user.talking",compact("to","name"));
@@ -74,6 +77,6 @@ class PanelController extends Controller
             ('Information');
             $message->from('810610025wu@gmail.com','Customer');
         });
-        return redirect()->back();
+        return redirect()->back()->with("success","Your Email has been sent");
     }
 }

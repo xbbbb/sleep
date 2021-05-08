@@ -1,11 +1,16 @@
 @extends('layouts.app')
 
+
+
 @section('content')
+
+    @include('layouts.feedback')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Send Email') }}</div>
+                <div class="card-header">{{ __('The sales is currently offline, Please send a message, We will contact you ASAP') }}</div>
 
                 <div class="card-body">
                     <form method="post" action="{{url("/send_info")}}" id="contact-form">
