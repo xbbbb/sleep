@@ -51,6 +51,12 @@
             socket = new WebSocket("ws://159.203.191.85:1215");
         }
 
+        socket.onerror = function() {
+            console.log('error');
+            socket = new WebSocket("ws://159.203.191.85:1215");
+
+        };
+
         socket.onmessage = function(e){
            let data = JSON.parse(e.data)
             console.log("message");
