@@ -73,6 +73,7 @@
                     "uid": {{ Auth::user()->id }},
                 }
             };
+            console.log("login ...");
             socket.send(JSON.stringify(msg))
         }
 
