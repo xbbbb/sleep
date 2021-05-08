@@ -72,6 +72,7 @@
 
         socket.onclose = function (event) {
             console.log("Connection closed ...");
+            socket = new WebSocket("ws://159.203.191.85:1215");
         }
 
         socket.onmessage = function(e){
