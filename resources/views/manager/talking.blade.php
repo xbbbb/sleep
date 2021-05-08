@@ -28,10 +28,11 @@
     $(document).ready(function () {
         var talk_users=[];
         var history=[];
+        var socket;
         init()
 
         function init() {
-            var socket = new WebSocket("ws://159.203.191.85:1215");
+             socket = new WebSocket("ws://159.203.191.85:1215");
             socket.onopen = function (event) {
                 console.log("Connection open ...");
                 login()
