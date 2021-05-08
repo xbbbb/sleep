@@ -61,6 +61,12 @@
         var socket = new WebSocket("ws://159.203.191.85:1215");
         socket.onopen = function (event) {
             console.log("Connection open ...");
+            login()
+        }
+
+
+        setInterval(login,300000)
+        function login(){
             let msg={
                 "event": "login",
                 "data": {

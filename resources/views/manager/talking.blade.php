@@ -31,6 +31,11 @@
         var socket = new WebSocket("ws://159.203.191.85:1215");
         socket.onopen = function (event) {
             console.log("Connection open ...");
+            login()
+
+        }
+        setInterval(login,300000)
+        function login(){
             let msg={
                 "event": "login",
                 "data": {
@@ -38,7 +43,6 @@
                 }
             };
             socket.send(JSON.stringify(msg))
-
         }
 
         socket.onclose = function (event) {
@@ -48,7 +52,7 @@
 
         socket.onmessage = function(e){
            let data = JSON.parse(e.data)
-
+            console.log("message");
             if(data.event=="receive"){
                 if(data.data.user!=parseInt({{ Auth::user()->id }})){
                     var if_exist=false;
