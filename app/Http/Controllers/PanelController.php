@@ -68,7 +68,7 @@ class PanelController extends Controller
 
     public function send_info(Request $request){
         $user=User::find($request->merchant);
-        $data = array('first_name'=>$request->first_name,'last_name'=>$request->last_name,'email'=>$request->email,'message'=>$request->message,'phone'=>$request->phone);
+        $data = array('first_name'=>$request->first_name,'last_name'=>$request->last_name,'email'=>$request->email,'message'=>$request->message);
         Mail::send('mail.info', $data, function($message) use ($user) {
             $message->to( $user->email, 'Sales')->subject
             ('Information');
