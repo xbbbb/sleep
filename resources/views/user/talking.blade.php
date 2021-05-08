@@ -58,44 +58,49 @@
     $(document).ready(function () {
 
         var history=[];
-        var socket = new WebSocket("ws://159.203.191.85:1215");
-        socket.onopen = function (event) {
-            console.log("Connection open ...");
-            login()
-        }
+        init();
 
-
-        setInterval(login,300000)
-        function login(){
-            let msg={
-                "event": "login",
-                "data": {
-                    "uid": {{ Auth::user()->id }},
-                }
-            };
-            console.log("login ...");
-            socket.send(JSON.stringify(msg))
-        }
-
-        socket.onclose = function (event) {
-            console.log("Connection closed ...");
-            socket = new WebSocket("ws://159.203.191.85:1215");
-        }
-
-        socket.onmessage = function(e){
-           let data = JSON.parse(e.data)
-            console.log(data);
-            if(data.event=="receive"){
-                if(data.data.user==$("#to").val()){
-                    $("#board").append(generateTalking(data.data.content,true))
-                    history.push($("#merchant").val() +": "+data.data.content)
-                    console.log(history)
-                }
-
+        function init() {
+            var socket = new WebSocket("ws://159.203.191.85:1215");
+            socket.onopen = function (event) {
+                console.log("Connection open ...");
+                login()
             }
 
-            //$("#board").append(generateTalking($("#talk").val(),false))
+
+            setInterval(login,300000)
+            function login(){
+                let msg={
+                    "event": "login",
+                    "data": {
+                        "uid": {{ Auth::user()->id }},
+                    }
+                };
+                console.log("login ...");
+                socket.send(JSON.stringify(msg))
+            }
+
+            socket.onclose = function (event) {
+                console.log("Connection closed ...");
+                init();
+            }
+
+            socket.onmessage = function(e){
+                let data = JSON.parse(e.data)
+                console.log(data);
+                if(data.event=="receive"){
+                    if(data.data.user==$("#to").val()){
+                        $("#board").append(generateTalking(data.data.content,true))
+                        history.push($("#merchant").val() +": "+data.data.content)
+                        console.log(history)
+                    }
+
+                }
+
+                //$("#board").append(generateTalking($("#talk").val(),false))
+            }
         }
+
 
 
         $("#send").click(function () {

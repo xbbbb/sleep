@@ -28,63 +28,68 @@
     $(document).ready(function () {
         var talk_users=[];
         var history=[];
-        var socket = new WebSocket("ws://159.203.191.85:1215");
-        socket.onopen = function (event) {
-            console.log("Connection open ...");
-            login()
+        init()
 
-        }
-        setInterval(login,300000)
-        function login(){
-            let msg={
-                "event": "login",
-                "data": {
-                    "uid": {{ Auth::user()->id }},
-                }
+        function init() {
+            var socket = new WebSocket("ws://159.203.191.85:1215");
+            socket.onopen = function (event) {
+                console.log("Connection open ...");
+                login()
+
+            }
+            setInterval(login,300000)
+            function login(){
+                let msg={
+                    "event": "login",
+                    "data": {
+                        "uid": {{ Auth::user()->id }},
+                    }
+                };
+                console.log("login ...");
+                socket.send(JSON.stringify(msg))
+            }
+
+            socket.onclose = function (event) {
+                console.log("Connection closed ...");
+                init()
+            }
+
+            socket.onerror = function() {
+                console.log('error');
+                init()
+
             };
-            console.log("login ...");
-            socket.send(JSON.stringify(msg))
-        }
 
-        socket.onclose = function (event) {
-            console.log("Connection closed ...");
-            socket = new WebSocket("ws://159.203.191.85:1215");
-        }
+            socket.onmessage = function(e){
+                let data = JSON.parse(e.data)
+                console.log("message");
+                if(data.event=="receive"){
+                    if(data.data.user!=parseInt({{ Auth::user()->id }})){
+                        var if_exist=false;
+                        var i=0;
+                        while( i<talk_users.length){
+                            if(talk_users[i]==data.data.user){
+                                $("#board-"+data.data.user).append(generateTalking(data.data.content,true))
+                                if_exist=true;
+                                history[i].push(data.data.name+":"+data.data.content)
+                                break;
 
-        socket.onerror = function() {
-            console.log('error');
-            socket = new WebSocket("ws://159.203.191.85:1215");
-
-        };
-
-        socket.onmessage = function(e){
-           let data = JSON.parse(e.data)
-            console.log("message");
-            if(data.event=="receive"){
-                if(data.data.user!=parseInt({{ Auth::user()->id }})){
-                    var if_exist=false;
-                    var i=0;
-                    while( i<talk_users.length){
-                        if(talk_users[i]==data.data.user){
+                            }
+                            i++
+                        }
+                        if(if_exist==false){
+                            generateBoard(data.data.name,data.data.user)
                             $("#board-"+data.data.user).append(generateTalking(data.data.content,true))
-                            if_exist=true;
-                            history[i].push(data.data.name+":"+data.data.content)
-                            break;
+                            talk_users.push(data.data.user)
+                            history.push([data.data.name+":"+data.data.content]);
 
                         }
-                        i++
-                    }
-                    if(if_exist==false){
-                        generateBoard(data.data.name,data.data.user)
-                        $("#board-"+data.data.user).append(generateTalking(data.data.content,true))
-                        talk_users.push(data.data.user)
-                        history.push([data.data.name+":"+data.data.content]);
 
                     }
-
                 }
             }
         }
+
 
         $(document).on("click", ".send", function () {
             let id=$(this).attr("talk-to");
