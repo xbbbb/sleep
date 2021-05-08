@@ -44,6 +44,17 @@
                         @guest
 
                         @else
+                            @if(Auth::user()->admin_level==1)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('change_online') }}" style="color: {{Auth::user()->if_online==1 ? "green" : "red"}}" >
+                                        @if(Auth::user()->if_online==1)
+                                        Online
+                                        @else
+                                        Offline
+                                        @endif
+                                    </a>
+                                </li>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

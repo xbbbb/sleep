@@ -65,15 +65,7 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/user_talking/1') }}">Let's Talking</a>
-                    @else
-                        <a href="{{ url('/login_page') }}">Let's Talking</a>
-                    @endauth
-                </div>
-            @endif
+
 
             <div class="content">
                 <div>

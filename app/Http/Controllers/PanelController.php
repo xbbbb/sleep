@@ -11,7 +11,7 @@ use PDF;
 class PanelController extends Controller
 {
     public function home(){
-        return redirect()->to("/manager_talking/1");
+        return redirect()->to("/manager_talking");
     }
 
     public function logout(){
@@ -26,7 +26,7 @@ class PanelController extends Controller
     public function user_talking($to){
         $user=Auth::user();
         if($user->admin_level==1){
-            return redirect("/manager_talking/1");
+            return redirect("/manager_talking");
         }
         $manager=User::find($to);
         if($manager->admin_level==1){
@@ -41,15 +41,13 @@ class PanelController extends Controller
 
 
 
-    public function manager_talking($to){
+    public function manager_talking(){
         $user=Auth::user();
         if($user->admin_level==0){
             return redirect("/user_talking/1");
         }
-        $customer=User::find($to);
-        $name=$customer->name;
-        $email=$customer->email;
-        return view("manager.talking",compact("to","name","email"));
+
+        return view("manager.talking");
     }
 
 
@@ -59,5 +57,21 @@ class PanelController extends Controller
         $pdf=PDF::loadView("pdf.record",$data);
         return $pdf->download('record.pdf');
 
+    }
+
+
+    public function email($merchant){
+        return view("user.email",compact("merchant"));
+    }
+
+    public function send_info(Request $request){
+        $user=User::find($request->merchant);
+        $data = array('first_name'=>$request->first_name,'last_name'=>$request->last_name,'email'=>$request->email,'message'=>$request->message,'phone'=>$request->phone);
+        Mail::send('mail.info', $data, function($message) use ($user) {
+            $message->to( $user->email, 'Sales')->subject
+            ('Information');
+            $message->from('810610025wu@gmail.com','Customer');
+        });
+        return redirect()->back();
     }
 }
